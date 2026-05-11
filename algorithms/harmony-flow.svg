@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="720" viewBox="0 0 1180 720" role="img" aria-labelledby="title desc">
+  <title id="title">Harmony 算法流程</title>
+  <desc id="desc">Harmony 从 PCA embedding 和 batch metadata 开始，经过多样性约束聚类和 mixture-of-experts ridge correction，输出校正后的 embedding。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#3f6265"/>
+    </marker>
+    <style>
+      .bg { fill: #f7faf9; }
+      .panel { fill: #ffffff; stroke: #b9cfd0; stroke-width: 2; }
+      .loop { fill: #eef6f5; stroke: #78a8aa; stroke-width: 2.5; stroke-dasharray: 9 7; }
+      .node { fill: #ffffff; stroke: #93b6b8; stroke-width: 2; }
+      .accent { fill: #e4f1f0; stroke: #6c9ea0; stroke-width: 2; }
+      .output { fill: #fff8e8; stroke: #d4ae5a; stroke-width: 2; }
+      .title { font: 700 24px Arial, sans-serif; fill: #30333a; }
+      .label { font: 700 18px Arial, sans-serif; fill: #30333a; }
+      .small { font: 15px Arial, sans-serif; fill: #5d626b; }
+      .code { font: 14px Menlo, Consolas, monospace; fill: #5d626b; }
+      .arrow { stroke: #3f6265; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+      .muted { stroke: #9bb6b8; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect class="bg" width="1180" height="720" rx="0"/>
+  <text class="title" x="48" y="54">Harmony：在低维空间中整合单细胞数据</text>
+  <text class="small" x="48" y="82">输入：PCA/cell embedding 和分类协变量。输出：用于 neighbors、UMAP、clustering 和 trajectory 的校正 embedding。</text>
+
+  <rect class="panel" x="42" y="118" width="244" height="146" rx="12"/>
+  <text class="label" x="68" y="158">1. 准备输入</text>
+  <text class="code" x="68" y="190">Z: PCA embedding</text>
+  <text class="code" x="68" y="216">Phi: batch one-hot</text>
+  <text class="small" x="68" y="242">先统一归一化并计算 PCA。</text>
+
+  <rect class="loop" x="334" y="112" width="520" height="428" rx="18"/>
+  <text class="label" x="362" y="150">反复迭代，直到目标函数收敛</text>
+
+  <rect class="node" x="374" y="184" width="196" height="128" rx="12"/>
+  <text class="label" x="398" y="222">2. 软聚类</text>
+  <text class="code" x="398" y="252">R: cluster 概率</text>
+  <text class="small" x="398" y="278">按余弦距离分配细胞。</text>
+  <text class="code" x="398" y="300">cluster_cpp()</text>
+
+  <rect class="accent" x="620" y="184" width="196" height="128" rx="12"/>
+  <text class="label" x="644" y="222">3. 多样性惩罚</text>
+  <text class="code" x="644" y="252">O: 观察到的组成</text>
+  <text class="code" x="644" y="276">E: 期望组成</text>
+  <text class="small" x="644" y="300">鼓励每个 cluster 混合 batch。</text>
+
+  <rect class="node" x="374" y="370" width="196" height="128" rx="12"/>
+  <text class="label" x="398" y="408">4. 岭回归校正</text>
+  <text class="small" x="398" y="438">估计每个 cluster 的 batch effect。</text>
+  <text class="code" x="398" y="464">moe_correct_ridge_cpp()</text>
+  <text class="small" x="398" y="488">保留截距，只移除协变量效应。</text>
+
+  <rect class="accent" x="620" y="370" width="196" height="128" rx="12"/>
+  <text class="label" x="644" y="408">5. 细胞级校正量</text>
+  <text class="small" x="644" y="438">每个细胞按 R 加权</text>
+  <text class="small" x="644" y="462">得到自己的校正量。</text>
+  <text class="code" x="644" y="488">Z_corr = Z - 校正量</text>
+
+  <rect class="output" x="910" y="224" width="224" height="182" rx="12"/>
+  <text class="label" x="936" y="266">6. 输出结果</text>
+  <text class="code" x="936" y="296">Z_hat / Z_corr</text>
+  <text class="small" x="936" y="326">细胞数和维度与输入</text>
+  <text class="small" x="936" y="350">embedding 保持一致。</text>
+  <text class="small" x="936" y="384">不修改表达矩阵。</text>
+
+  <path class="arrow" d="M286 191 C308 191, 326 191, 352 208"/>
+  <path class="arrow" d="M570 248 L620 248"/>
+  <path class="arrow" d="M718 312 C718 342, 575 342, 515 370"/>
+  <path class="arrow" d="M570 434 L620 434"/>
+  <path class="arrow" d="M816 434 C850 434, 856 354, 900 330"/>
+  <path class="muted" d="M472 370 C436 346, 432 332, 472 312"/>
+  <text class="small" x="356" y="568">论文逻辑：多样性约束聚类 -> mixture-model 线性校正 -> 重复迭代。</text>
+  <text class="small" x="356" y="596">代码逻辑：RunHarmony.default() 构造 Phi 和参数，harmonize() 调用两个核心 C++ 步骤。</text>
+  <text class="small" x="356" y="624">下游分析：校正 embedding 用于 neighbors、UMAP、Leiden/Louvain 和轨迹；差异表达仍使用 batch-aware 模型。</text>
+</svg>
