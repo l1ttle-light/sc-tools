@@ -1,0 +1,49 @@
+dataset:
+  # "scanpy_pbmc3k" downloads/loads Scanpy's public PBMC3k example dataset.
+  # Use "tenx_mtx" with config/samples.tsv for real 10x matrix directories.
+  source: scanpy_pbmc3k
+  output_prefix: pbmc3k
+
+qc:
+  min_genes: 200
+  min_cells: 3
+  max_pct_mt: 5
+  max_genes_by_counts: 2500
+
+normalization:
+  target_sum: 10000
+  log1p: true
+
+hvg:
+  flavor: seurat
+  min_mean: 0.0125
+  max_mean: 3
+  min_disp: 0.5
+
+scale:
+  max_value: 10
+  regress_out:
+    - total_counts
+    - pct_counts_mt
+
+pca:
+  n_comps: 50
+  random_state: 0
+
+neighbors:
+  n_neighbors: 10
+  n_pcs: 40
+  random_state: 0
+
+umap:
+  random_state: 0
+
+clustering:
+  method: leiden
+  resolution: 1.0
+  random_state: 0
+
+markers:
+  groupby: leiden
+  method: wilcoxon
+  n_genes: 100

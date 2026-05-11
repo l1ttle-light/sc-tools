@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="740" viewBox="0 0 1180 740" role="img" aria-labelledby="title desc">
+  <title id="title">scVI 算法流程</title>
+  <desc id="desc">scVI 从原始 count matrix 和 batch metadata 开始，经 encoder 得到 latent z 和 library size，再由 decoder 生成 ZINB 或 NB 分布参数，并通过 ELBO 训练。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#3f6265"/>
+    </marker>
+    <style>
+      .bg { fill: #f7faf9; }
+      .panel { fill: #ffffff; stroke: #b9cfd0; stroke-width: 2; }
+      .node { fill: #ffffff; stroke: #93b6b8; stroke-width: 2; }
+      .accent { fill: #e4f1f0; stroke: #6c9ea0; stroke-width: 2; }
+      .loss { fill: #fff8e8; stroke: #d4ae5a; stroke-width: 2; }
+      .title { font: 700 24px Arial, "PingFang SC", sans-serif; fill: #30333a; }
+      .label { font: 700 18px Arial, "PingFang SC", sans-serif; fill: #30333a; }
+      .small { font: 15px Arial, "PingFang SC", sans-serif; fill: #5d626b; }
+      .code { font: 14px Menlo, Consolas, monospace; fill: #5d626b; }
+      .arrow { stroke: #3f6265; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+      .muted { stroke: #9bb6b8; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect class="bg" width="1180" height="740"/>
+  <text class="title" x="48" y="54">scVI：单细胞 count data 的深度生成模型</text>
+  <text class="small" x="48" y="82">目标：用一个概率模型同时做降维、batch 校正、归一化、imputation 和差异表达。</text>
+
+  <rect class="panel" x="48" y="122" width="230" height="150" rx="12"/>
+  <text class="label" x="72" y="160">1. 输入数据</text>
+  <text class="code" x="72" y="192">X: cells x genes counts</text>
+  <text class="code" x="72" y="218">s: batch / covariates</text>
+  <text class="small" x="72" y="248">通常来自 AnnData 的 X 或 layer。</text>
+
+  <rect class="node" x="332" y="122" width="230" height="150" rx="12"/>
+  <text class="label" x="356" y="160">2. Encoder</text>
+  <text class="small" x="356" y="192">神经网络近似后验分布。</text>
+  <text class="code" x="356" y="222">q(z | x, s)</text>
+  <text class="code" x="356" y="248">q(l | x, s)</text>
+
+  <rect class="accent" x="616" y="122" width="230" height="150" rx="12"/>
+  <text class="label" x="640" y="160">3. 潜变量</text>
+  <text class="code" x="640" y="192">z: 低维细胞状态</text>
+  <text class="code" x="640" y="218">l: library size</text>
+  <text class="small" x="640" y="248">z 用于 UMAP、neighbors 和聚类。</text>
+
+  <rect class="node" x="900" y="122" width="230" height="150" rx="12"/>
+  <text class="label" x="924" y="160">4. Decoder</text>
+  <text class="small" x="924" y="192">从 z 和 batch 生成表达分布。</text>
+  <text class="code" x="924" y="222">rho: normalized expr</text>
+  <text class="code" x="924" y="248">pi: dropout logits</text>
+
+  <rect class="accent" x="474" y="358" width="230" height="150" rx="12"/>
+  <text class="label" x="498" y="396">5. 观测模型</text>
+  <text class="small" x="498" y="428">对每个 gene 的 count 建模。</text>
+  <text class="code" x="498" y="458">ZINB / NB / Poisson</text>
+  <text class="code" x="498" y="484">mean = l * rho</text>
+
+  <rect class="loss" x="192" y="358" width="230" height="150" rx="12"/>
+  <text class="label" x="216" y="396">6. 训练目标</text>
+  <text class="small" x="216" y="428">最大化 ELBO。</text>
+  <text class="code" x="216" y="458">reconstruction loss</text>
+  <text class="code" x="216" y="484">+ KL penalties</text>
+
+  <rect class="panel" x="756" y="358" width="230" height="150" rx="12"/>
+  <text class="label" x="780" y="396">7. 下游输出</text>
+  <text class="code" x="780" y="426">X_scVI latent</text>
+  <text class="code" x="780" y="452">normalized expression</text>
+  <text class="code" x="780" y="478">DE Bayes factor</text>
+
+  <path class="arrow" d="M278 197 L332 197"/>
+  <path class="arrow" d="M562 197 L616 197"/>
+  <path class="arrow" d="M846 197 L900 197"/>
+  <path class="arrow" d="M1015 272 C1015 330, 704 330, 660 358"/>
+  <path class="arrow" d="M474 433 L422 433"/>
+  <path class="muted" d="M307 358 C348 318, 402 284, 447 272"/>
+  <path class="arrow" d="M704 433 L756 433"/>
+  <path class="muted" d="M871 358 C846 328, 794 296, 731 272"/>
+
+  <text class="small" x="72" y="594">代码入口：SCVI.setup_anndata() 注册 counts、batch 和 covariates；SCVI.train() 训练 VAE 模块。</text>
+  <text class="small" x="72" y="624">核心实现：VAE._regular_inference() 编码；VAE.generative() 解码；VAE.loss() 计算 reconstruction 和 KL。</text>
+  <text class="small" x="72" y="654">解释重点：latent z 适合做整合和聚类；normalized expression 和差异表达来自生成模型的后验估计。</text>
+</svg>

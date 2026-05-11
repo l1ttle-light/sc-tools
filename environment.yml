@@ -1,0 +1,17 @@
+name: sc-tools-pbmc
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - scanpy>=1.10
+  - anndata
+  - pandas
+  - numpy
+  - scipy
+  - matplotlib
+  - seaborn
+  - pyyaml
+  - leidenalg
+  - python-igraph
+  - pip

@@ -1,0 +1,2 @@
+sample_id	group	batch	path
+pbmc3k	public_pbmc	batch1	data/raw/pbmc3k/raw_feature_bc_matrix
