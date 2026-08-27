@@ -1,4 +1,4 @@
-# raw matrix 到 h5ad、marker 表、UMAP 图和 QC 报告
+# 原始矩阵到 h5ad、标志基因表、UMAP 图和 QC 报告
 
 这个模板默认使用 Scanpy 内置的公开 PBMC3k 数据集，方便快速验证环境和流程。真实项目中也可以把 `config/parameters.yaml` 的 `dataset.source` 改成 `tenx_mtx`，再在 `config/samples.tsv` 指向 10x Genomics 输出的 `raw_feature_bc_matrix` 或 `filtered_feature_bc_matrix`。
 
@@ -42,7 +42,7 @@ single-cell-project/
 当前仓库已经创建了对应的 `config/`、`scripts/`、`data/`、`results/`、`logs/` 和 `notebooks/` 目录。
 
 <div class="doc-callout important">
-  <strong>raw 不可改，processed 可再生</strong>
+  <strong>原始数据不可改，处理结果可再生</strong>
   <p>`data/raw` 应该只读保存；中间文件和结果都应该能由脚本重新生成。这样参数调整不会污染原始数据。</p>
 </div>
 
@@ -93,8 +93,8 @@ markers:
   <span>读取 10x 并合并样本</span>
   <span>计算 QC 并过滤</span>
   <span>归一化和 HVG</span>
-  <span>PCA、neighbors、UMAP、Leiden</span>
-  <span>计算 marker genes</span>
+  <span>PCA、邻居图、UMAP、Leiden</span>
+  <span>计算标志基因</span>
   <span>导出图表</span>
   <span>生成报告素材</span>
 </div>
@@ -158,12 +158,12 @@ adata.write_h5ad("data/processed/processed_scanpy.h5ad")
 
 <div class="check-grid">
   <article>
-    <strong>processed h5ad</strong>
-    <span><code>data/processed/processed_scanpy.h5ad</code>, contains QC, normalization, PCA, UMAP, cluster, and marker results.</span>
+    <strong>处理后的 h5ad</strong>
+    <span><code>data/processed/processed_scanpy.h5ad</code>, 包含 QC、归一化、PCA、UMAP、细胞群和标志基因结果。</span>
   </article>
   <article>
-    <strong>marker 表</strong>
-    <span><code>results/tables/markers/markers_leiden.tsv</code>, with gene, score, logfoldchange, p-value, and adjusted p-value for each cluster.</span>
+    <strong>标志基因表</strong>
+    <span><code>results/tables/markers/markers_leiden.tsv</code>, 记录每个细胞群的 gene、score、logfoldchange、p-value 和调整后 p-value。</span>
   </article>
   <article>
     <strong>UMAP 图</strong>
@@ -171,7 +171,7 @@ adata.write_h5ad("data/processed/processed_scanpy.h5ad")
   </article>
   <article>
     <strong>QC 报告</strong>
-    <span><code>results/reports/qc_report.html</code>, records cell counts before and after filtering, QC distributions, parameters, and software versions.</span>
+    <span><code>results/reports/qc_report.html</code>, 记录过滤前后细胞数、QC 分布、参数和软件版本。</span>
   </article>
 </div>
 
@@ -210,7 +210,7 @@ results/reports/qc_report.html
   <span>total_counts 分布</span>
   <span>pct_counts_mt 分布</span>
   <span>样本/批次 UMAP</span>
-  <span>cluster marker 摘要</span>
+  <span>细胞群标志基因摘要</span>
   <span>参数和软件版本</span>
 </div>
 
@@ -219,5 +219,5 @@ results/reports/qc_report.html
 1. 每个样本都有合理数量的细胞保留，没有某个样本被阈值整体清空。
 2. QC 指标的过滤前后分布能解释，不只是“因为教程这么写”。
 3. UMAP 不应只按测序批次分开；如果分开，要先考虑批次或样本差异。
-4. marker gene 与 cluster 命名有一致证据，不能只靠一个 marker。
-5. 所有输出都能由脚本从 raw 数据重新生成。
+4. 标志基因与细胞群命名有一致证据，不能只靠一个标志基因。
+5. 所有输出都能由脚本从原始数据重新生成。

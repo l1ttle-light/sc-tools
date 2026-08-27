@@ -25,7 +25,7 @@ adata = sc.read_10x_mtx(
 adata.var_names_make_unique()
 ```
 
-`var_names_make_unique()` 很常见，因为不同 gene id 可能映射到相同 symbol。真实项目里更建议同时保留 gene id 和 gene symbol，避免后续 marker gene 对不上。
+`var_names_make_unique()` 很常见，因为不同基因 ID 可能映射到相同基因符号。真实项目里更建议同时保留基因 ID 和基因符号，避免后续标志基因对不上。
 
 ## AnnData 的几个关键位置
 
@@ -45,7 +45,7 @@ adata.var_names_make_unique()
 <div class="check-grid">
   <article>
     <strong>adata.X 会被多次改写</strong>
-    <span>归一化、log 转换、scale 往往直接作用在 X 上。重要中间结果最好存入 layers 或 raw。</span>
+    <span>归一化、对数转换、标准化往往直接作用在 X 上。重要中间结果最好存入 layers 或 raw。</span>
   </article>
   <article>
     <strong>obs 是细胞表</strong>
@@ -57,14 +57,13 @@ adata.var_names_make_unique()
   </article>
   <article>
     <strong>uns 保存分析结果</strong>
-    <span>PCA 方差、marker gene 排名、绘图颜色等经常出现在 uns。</span>
+    <span>PCA 方差、标志基因排名、绘图颜色等经常出现在 uns。</span>
   </article>
 </div>
 
 ## 自检问题
 
-1. 为什么读取 gene symbol 后还要让 var names 唯一？
+1. 为什么读取基因符号后还要让 var names 唯一？
 2. `adata.obs` 和 `adata.var` 分别代表什么维度？
-3. 什么情况下应该把原始 counts 放到 `layers["counts"]`？
+3. 什么情况下应该把原始计数放到 `layers["counts"]`？
 4. 为什么真实项目里需要记录 Scanpy 和 AnnData 版本？
-

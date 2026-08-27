@@ -1,6 +1,6 @@
 # 免疫系统与微环境
 
-免疫学是单细胞研究最常见、也最容易解释过度的场景之一。一个 T cell cluster 不只是一个名字，它背后牵涉发育谱系、抗原刺激、组织定位、细胞互作、炎症环境和代谢状态。
+免疫学是单细胞研究最常见、也最容易解释过度的场景之一。一个 T 细胞群不只是一个名字，它背后牵涉发育谱系、抗原刺激、组织定位、细胞互作、炎症环境和代谢状态。
 
 ## 免疫系统的两条主线
 
@@ -20,14 +20,14 @@ Janeway 和 Medzhitov 对先天免疫识别、模式识别受体和适应性免�
 ## 免疫细胞速查
 
 <div class="flow-strip">
-  <span>T cells：杀伤、辅助、调节和记忆</span>
-  <span>B cells：抗体、抗原呈递和浆细胞分化</span>
-  <span>NK cells：天然杀伤和应激识别</span>
-  <span>Monocytes：循环髓系前体与炎症响应</span>
-  <span>Macrophages：吞噬、修复、抗原呈递</span>
-  <span>Dendritic cells：抗原呈递和 T cell priming</span>
-  <span>Neutrophils：急性炎症和颗粒酶效应</span>
-  <span>Mast cells：过敏、屏障和组织炎症</span>
+  <span>T 细胞：杀伤、辅助、调节和记忆</span>
+  <span>B 细胞：抗体、抗原呈递和浆细胞分化</span>
+  <span>NK 细胞：天然杀伤和应激识别</span>
+  <span>单核细胞：循环髓系前体与炎症响应</span>
+  <span>巨噬细胞：吞噬、修复、抗原呈递</span>
+  <span>树突细胞：抗原呈递和 T 细胞启动</span>
+  <span>中性粒细胞：急性炎症和颗粒酶效应</span>
+  <span>肥大细胞：过敏、屏障和组织炎症</span>
 </div>
 
 ## 免疫微环境
@@ -36,11 +36,11 @@ Janeway 和 Medzhitov 对先天免疫识别、模式识别受体和适应性免�
 
 Binnewies 等人在 *Nature Medicine* 综述中把肿瘤免疫微环境整理为动态生态系统，强调免疫细胞、肿瘤细胞和基质成分之间的互作 [2]。单细胞研究常用这个视角解释不同细胞群之间的配体-受体通讯、耗竭状态和炎症程序。
 
-## T cell 状态不要只靠一个 marker
+## T 细胞状态不要只靠一个标志基因
 
 <div class="doc-callout warning">
   <strong>PDCD1 高不等于一句话“耗竭”</strong>
-  <p>T cell exhaustion 需要结合多个抑制受体、效应分子、转录因子、克隆扩增、组织环境和功能证据。单个 marker 只能提示方向。</p>
+  <p>T 细胞耗竭需要结合多个抑制受体、效应分子、转录因子、克隆扩增、组织环境和功能证据。单个标志基因只能提示方向。</p>
 </div>
 
 ## 单细胞免疫分析的解释路径
@@ -51,8 +51,8 @@ Binnewies 等人在 *Nature Medicine* 综述中把肿瘤免疫微环境整理为
   <span>检查激活/耗竭/干扰素状态</span>
   <span>结合样本和疾病分组</span>
   <span>看空间或组织来源</span>
-  <span>用 marker 支撑命名</span>
-  <span>保留 ambiguous 细胞</span>
+  <span>用标志基因支撑命名</span>
+  <span>保留不确定细胞</span>
   <span>回到功能验证</span>
 </div>
 
@@ -82,7 +82,7 @@ Binnewies 等人在 *Nature Medicine* 综述中把肿瘤免疫微环境整理为
 1. 先天免疫和适应性免疫的主要差异是什么？
 2. 为什么细胞类型和细胞状态要分开解释？
 3. 肿瘤免疫微环境包含哪些非免疫成分？
-4. 为什么单个 marker 不足以给 T cell 状态下结论？
+4. 为什么单个标志基因不足以给 T 细胞状态下结论？
 
 ## 参考文献
 

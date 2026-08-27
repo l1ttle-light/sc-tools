@@ -1,25 +1,25 @@
 # 常用单细胞分析工具清单
 
-除 AnnData, Scanpy, Seurat, and scvi-tools 之外，单细胞项目常会按任务接入专用工具。下面按分析问题组织一版工具地图，方便决定下一步该学什么。
+除 AnnData、Scanpy、Seurat 和 scvi-tools 之外，单细胞项目常会按任务接入专用工具。下面按分析问题组织一版工具地图，方便决定下一步该学什么。
 
 ## 细胞类型注释
 
 <div class="check-grid">
   <article>
     <strong><a href="/tools/celltypist/">CellTypist</a></strong>
-    <span>Python 自动注释工具，适合 immune cell annotation transfer。输出需要 marker gene 和组织背景复核。</span>
+    <span>Python 自动注释工具，适合免疫细胞注释迁移。输出需要标志基因和组织背景复核。</span>
   </article>
   <article>
     <strong>SingleR</strong>
-    <span>R/Bioconductor 注释工具，基于 reference transcriptome 做 label transfer。</span>
+    <span>R/Bioconductor 注释工具，基于参考转录组做标签迁移。</span>
   </article>
   <article>
     <strong>Azimuth</strong>
-    <span>Seurat 生态 reference mapping 工具，适合有高质量 reference atlas 的场景。</span>
+    <span>Seurat 生态的参考映射工具，适合有高质量参考图谱的场景。</span>
   </article>
   <article>
     <strong>Garnett / scmap</strong>
-    <span>可用于 marker-based 或 reference-based annotation，适合和其它结果交叉验证。</span>
+    <span>可用于基于标志基因或基于参考数据的注释，适合和其它结果交叉验证。</span>
   </article>
 </div>
 
@@ -28,7 +28,7 @@
 <div class="check-grid">
   <article>
     <strong><a href="/tools/squidpy/">Squidpy</a></strong>
-    <span>scverse 空间分析工具，覆盖 spatial graph, neighborhood enrichment, image features, and ligand-receptor。</span>
+    <span>scverse 空间分析工具，覆盖空间图、邻域富集、图像特征和配体-受体分析。</span>
   </article>
   <article>
     <strong>Giotto</strong>
@@ -49,45 +49,45 @@
 <div class="check-grid">
   <article>
     <strong>CellChat</strong>
-    <span>R 工具，用 ligand-receptor database 推断细胞群间通讯网络，适合微环境和免疫互作分析。</span>
+    <span>R 工具，用配体-受体数据库推断细胞群间通讯网络，适合微环境和免疫互作分析。</span>
   </article>
   <article>
     <strong>CellPhoneDB</strong>
-    <span>常用 ligand-receptor 推断工具，适合 cluster-level communication screening。</span>
+    <span>常用配体-受体推断工具，适合细胞群层面的通讯筛查。</span>
   </article>
   <article>
     <strong>NicheNet</strong>
-    <span>把 ligand activity 和 target gene program 连接起来，适合问“哪个发送细胞可能驱动接收细胞状态”。</span>
+    <span>把配体活性和靶基因程序连接起来，适合问“哪个发送细胞可能驱动接收细胞状态”。</span>
   </article>
   <article>
     <strong>LIANA</strong>
-    <span>整合多种 cell-cell communication 方法的框架，适合比较不同算法输出。</span>
+    <span>整合多种细胞间通讯方法的框架，适合比较不同算法输出。</span>
   </article>
 </div>
 
 <div class="doc-callout warning">
   <strong>通讯推断不是功能验证</strong>
-  <p>CellChat, CellPhoneDB, and NicheNet 的结果通常是候选互作。更可靠的解释需要空间邻近、配体/受体表达、下游 target program 和实验验证共同支持。</p>
+  <p>CellChat、CellPhoneDB 和 NicheNet 的结果通常是候选互作。更可靠的解释需要空间邻近、配体/受体表达、下游靶基因程序和实验验证共同支持。</p>
 </div>
 
-## 轨迹、发育和 RNA velocity
+## 轨迹、发育和 RNA 速率
 
 <div class="check-grid">
   <article>
     <strong>Monocle 3</strong>
-    <span>R 生态轨迹推断工具，常用于 pseudotime, trajectory graph, and branch analysis。</span>
+    <span>R 生态轨迹推断工具，常用于拟时序、轨迹图和分支分析。</span>
   </article>
   <article>
     <strong>Slingshot</strong>
-    <span>基于 cluster 和低维空间的 lineage inference 工具，适合较清晰的分化路径。</span>
+    <span>基于细胞群和低维空间的谱系推断工具，适合较清晰的分化路径。</span>
   </article>
   <article>
     <strong>Palantir</strong>
-    <span>用于连续状态、分化潜能和 fate probability 的轨迹分析。</span>
+    <span>用于连续状态、分化潜能和命运概率的轨迹分析。</span>
   </article>
   <article>
     <strong>scVelo</strong>
-    <span>RNA velocity 工具，用 spliced/unspliced counts 推断动态方向，依赖较强模型假设。</span>
+    <span>RNA 速率工具，用已剪接/未剪接计数推断动态方向，依赖较强模型假设。</span>
   </article>
 </div>
 
@@ -96,11 +96,11 @@
 <div class="check-grid">
   <article>
     <strong>Harmony</strong>
-    <span>常用 batch correction/integration 工具，可接 Seurat 或 Scanpy。</span>
+    <span>常用批次校正/整合工具，可接 Seurat 或 Scanpy。</span>
   </article>
   <article>
     <strong>BBKNN</strong>
-    <span>Scanpy 生态批次平衡邻居图方法，适合快速 integration baseline。</span>
+    <span>Scanpy 生态批次平衡邻居图方法，适合快速建立整合基线。</span>
   </article>
   <article>
     <strong>LIGER</strong>
@@ -108,28 +108,28 @@
   </article>
   <article>
     <strong>scArches</strong>
-    <span>基于 scvi-tools 的 reference mapping/atlas update 框架。</span>
+    <span>基于 scvi-tools 的参考映射/图谱更新框架。</span>
   </article>
 </div>
 
-## Doublet、质量控制和环境 RNA
+## 双细胞、质量控制和环境 RNA
 
 <div class="check-grid">
   <article>
     <strong>Scrublet</strong>
-    <span>Python doublet 检测工具，常与 Scanpy 搭配。</span>
+    <span>Python 双细胞检测工具，常与 Scanpy 搭配。</span>
   </article>
   <article>
     <strong>DoubletFinder</strong>
-    <span>Seurat/R 生态常用 doublet 检测工具。</span>
+    <span>Seurat/R 生态常用双细胞检测工具。</span>
   </article>
   <article>
     <strong>scDblFinder</strong>
-    <span>Bioconductor doublet detection 工具，适合 R pipeline。</span>
+    <span>Bioconductor 双细胞检测工具，适合 R 流程。</span>
   </article>
   <article>
     <strong>SoupX / CellBender</strong>
-    <span>处理 ambient RNA 或 background contamination。使用前要理解平台和样本背景。</span>
+    <span>处理环境 RNA 或背景污染。使用前要理解平台和样本背景。</span>
   </article>
 </div>
 
@@ -138,11 +138,11 @@
 <div class="check-grid">
   <article>
     <strong><a href="/tools/infercnv/">inferCNV</a></strong>
-    <span>从表达矩阵推断 large-scale CNV，常用于 malignant vs non-malignant 区分。</span>
+    <span>从表达矩阵推断大尺度 CNV，常用于区分恶性与非恶性细胞。</span>
   </article>
   <article>
     <strong>CopyKAT</strong>
-    <span>自动识别 aneuploid tumor cells 和 diploid normal cells 的 R 工具。</span>
+    <span>自动识别非整倍体肿瘤细胞和二倍体正常细胞的 R 工具。</span>
   </article>
   <article>
     <strong>HoneyBADGER</strong>
@@ -159,19 +159,19 @@
 <div class="check-grid">
   <article>
     <strong>decoupler</strong>
-    <span>Python/R 工具，用 regulator-target 或 pathway-gene sets 推断 TF/pathway activity。</span>
+    <span>Python/R 工具，用调控因子-靶基因关系或通路基因集推断转录因子/通路活性。</span>
   </article>
   <article>
     <strong>AUCell / SCENIC</strong>
-    <span>推断 regulon activity，适合转录因子调控网络分析。</span>
+    <span>推断调控子活性，适合转录因子调控网络分析。</span>
   </article>
   <article>
     <strong>GSVA / ssGSEA</strong>
-    <span>常用于 pathway score，但单细胞场景要注意 dropout 和 composition bias。</span>
+    <span>常用于通路评分，但单细胞场景要注意掉落事件和组成偏倚。</span>
   </article>
   <article>
     <strong>PROGENy / DoRothEA</strong>
-    <span>常与 decoupler 搭配，用于 pathway 和 TF activity 推断。</span>
+    <span>常与 decoupler 搭配，用于通路和转录因子活性推断。</span>
   </article>
 </div>
 
@@ -180,19 +180,19 @@
 <div class="check-grid">
   <article>
     <strong>Muon / MuData</strong>
-    <span>scverse 多模态容器和分析工具，适合 RNA + ATAC, RNA + protein 等数据。</span>
+    <span>scverse 多模态容器和分析工具，适合 RNA + ATAC、RNA + 蛋白等数据。</span>
   </article>
   <article>
     <strong>TOTALVI</strong>
-    <span>scvi-tools 中处理 CITE-seq RNA + protein 的模型。</span>
+    <span>scvi-tools 中处理 CITE-seq RNA + 蛋白的模型。</span>
   </article>
   <article>
     <strong>MULTIVI</strong>
-    <span>scvi-tools 中处理 paired/unpaired multiome 的模型。</span>
+    <span>scvi-tools 中处理配对/非配对多组学的模型。</span>
   </article>
   <article>
     <strong>Signac</strong>
-    <span>Seurat 生态的 scATAC-seq 和 multiome 分析工具。</span>
+    <span>Seurat 生态的 scATAC-seq 和多组学分析工具。</span>
   </article>
 </div>
 
@@ -201,15 +201,15 @@
 <div class="check-grid">
   <article>
     <strong>MAST</strong>
-    <span>单细胞差异表达常用模型，适合考虑 detection rate 等因素。</span>
+    <span>单细胞差异表达常用模型，适合考虑检出率等因素。</span>
   </article>
   <article>
     <strong>edgeR / DESeq2 pseudobulk</strong>
-    <span>按 sample 聚合做 pseudobulk DE，通常比 cell-level DE 更贴近实验设计。</span>
+    <span>按样本聚合做伪 bulk 差异表达，通常比细胞层面的差异表达更贴近实验设计。</span>
   </article>
   <article>
     <strong>Milo</strong>
-    <span>分析细胞状态/邻域 abundance changes，适合 differential abundance。</span>
+    <span>分析细胞状态/邻域丰度变化，适合差异丰度分析。</span>
   </article>
   <article>
     <strong>muscat</strong>
@@ -219,10 +219,10 @@
 
 ## 选择原则
 
-1. 先明确任务：annotation, integration, velocity, spatial, communication, pathway, CNV, multiome, DE, or abundance。
+1. 先明确任务：注释、整合、RNA 速率、空间分析、细胞通讯、通路分析、CNV、多组学、差异表达或丰度变化。
 2. 优先看官方教程，确认输入对象、矩阵要求和版本。
 3. 博客和经验帖适合补参数判断，但不能替代官方 API。
-4. 自动工具的输出要回到 marker、样本设计和生物学背景复核。
+4. 自动工具的输出要回到标志基因、样本设计和生物学背景复核。
 5. 涉及微环境和通讯时，最好结合空间邻近或实验验证。
 
 ## 资料入口
@@ -238,4 +238,3 @@
 - [Muon documentation](https://muon.readthedocs.io/)
 - [decoupler documentation](https://decoupler.readthedocs.io/)
 - [Scrublet repository](https://github.com/swolock/scrublet)
-

@@ -5,7 +5,7 @@
 <div class="tool-grid">
   <a href="/tools/anndata/">
     <strong>AnnData</strong>
-    <span>Python/scverse 生态的数据容器，承载 X, obs, var, layers, obsm, varm, obsp, and uns。</span>
+    <span>Python/scverse 生态的数据容器，承载 X、obs、var、layers、obsm、varm、obsp 和 uns。</span>
   </a>
   <a href="/tools/scanpy/">
     <strong>Scanpy</strong>
@@ -21,27 +21,27 @@
   </a>
   <a href="/tools/celltypist/">
     <strong>CellTypist</strong>
-    <span>自动细胞类型注释工具，适合 annotation transfer 和免疫细胞初筛。</span>
+    <span>自动细胞类型注释工具，适合注释迁移和免疫细胞初筛。</span>
   </a>
   <a href="/tools/squidpy/">
     <strong>Squidpy</strong>
-    <span>空间组学分析工具，覆盖 spatial graph、邻域富集和空间模式。</span>
+    <span>空间组学分析工具，覆盖空间图、邻域富集和空间模式。</span>
   </a>
   <a href="/tools/infercnv/">
     <strong>inferCNV</strong>
-    <span>从 scRNA-seq 表达矩阵推断 large-scale CNV，常用于肿瘤恶性细胞识别。</span>
+    <span>从 scRNA-seq 表达矩阵推断大尺度 CNV，常用于肿瘤恶性细胞识别。</span>
   </a>
   <a href="/tools/common-tools/">
     <strong>常用工具清单</strong>
-    <span>自动注释、空间组学、细胞通讯、RNA velocity、doublet、通路活性和 CNV 推断工具。</span>
+    <span>自动注释、空间组学、细胞通讯、RNA 速率、双细胞、通路活性和 CNV 推断工具。</span>
   </a>
 </div>
 
 ## 第一阶段
 
-先纳入 AnnData, Scanpy, Seurat, and scvi-tools。AnnData 是 Python 数据容器，Scanpy 是 Python 常规分析主线，Seurat 是 R 生态主线，scvi-tools 负责更现代的整合和概率建模。
+先纳入 AnnData、Scanpy、Seurat 和 scvi-tools。AnnData 是 Python 数据容器，Scanpy 是 Python 常规分析主线，Seurat 是 R 生态主线，scvi-tools 负责更现代的整合和概率建模。
 
 <div class="doc-callout important">
   <strong>学习目标</strong>
-  <p>不是只跑通一份 notebook，而是能解释每一步为什么要做、参数改变会影响什么、图上异常应该回到哪一步排查。</p>
+  <p>不是只跑通一份笔记本，而是能解释每一步为什么要做、参数改变会影响什么、图上异常应该回到哪一步排查。</p>
 </div>

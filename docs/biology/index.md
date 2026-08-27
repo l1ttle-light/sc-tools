@@ -1,6 +1,6 @@
 # 生物学知识
 
-这一部分先按“分子信息流 -> 多组学层级 -> 测序技术 -> 细胞类型 -> 免疫学机制 -> 组织微环境”的顺序组织。单细胞分析的难点不只是跑工具，而是把 cluster、marker、pathway、cell state 和疾病机制放回生物学框架里解释。
+这一部分先按“分子信息流 -> 多组学层级 -> 测序技术 -> 细胞类型 -> 免疫学机制 -> 组织微环境”的顺序组织。单细胞分析的难点不只是跑工具，而是把细胞群、标志基因、通路、细胞状态和疾病机制放回生物学框架里解释。
 
 <div class="path-grid">
   <a href="/biology/central-dogma-omics">
@@ -13,7 +13,7 @@
   </a>
   <a href="/biology/common-cell-types">
     <strong>常见细胞类型</strong>
-    <span>按细胞谱系整理功能、典型 marker 和注释时的常见注意事项。</span>
+    <span>按细胞谱系整理功能、典型标志基因和注释时的常见注意事项。</span>
   </a>
   <a href="/biology/immunology-microenvironment">
     <strong>免疫系统与微环境</strong>
@@ -37,7 +37,7 @@
   </a>
   <a href="/biology/adaptive-effector-immunity">
     <strong>适应性免疫应答</strong>
-    <span>T cell priming、CD4/CD8 效应分化、B cell 生发中心、抗体功能和免疫记忆。</span>
+    <span>T 细胞启动、CD4/CD8 效应分化、B 细胞生发中心、抗体功能和免疫记忆。</span>
   </a>
   <a href="/biology/mucosal-disease-immunotherapy">
     <strong>黏膜免疫、疾病与治疗</strong>

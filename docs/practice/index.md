@@ -6,7 +6,7 @@
   <span>processed.h5ad</span>
   <span>QC report</span>
   <span>UMAP figures</span>
-  <span>marker table</span>
+  <span>标志基因表</span>
   <span>analysis log</span>
   <span>parameters.yaml</span>
   <span>environment.yaml</span>
@@ -17,7 +17,7 @@
   <span class="feature-index">P1</span>
   <div>
     <h2>从 raw_feature_bc_matrix 到最终报告</h2>
-    <p>推荐以脚本化 pipeline 而不是手动 notebook 为主线：notebook 用于探索，脚本用于复现，报告用于沟通。</p>
+    <p>推荐以脚本化流程而不是手动笔记本为主线：笔记本用于探索，脚本用于复现，报告用于沟通。</p>
     <a href="/practice/raw-matrix-to-report">进入实战模板</a>
   </div>
 </div>
@@ -39,7 +39,7 @@
   </article>
   <article>
     <strong>报告可复查</strong>
-    <span>QC 图、过滤前后数量、marker 表和 UMAP 统一进入报告。</span>
+    <span>QC 图、过滤前后数量、标志基因表和 UMAP 统一进入报告。</span>
   </article>
 </div>
 

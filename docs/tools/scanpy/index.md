@@ -1,14 +1,14 @@
 # Scanpy 教程
 
-Scanpy 是 Python 生态中最常用的单细胞 RNA-seq 分析框架之一。官方基础教程以 PBMC3k 数据为例，展示了从读取表达矩阵到聚类、marker gene 和细胞类型注释的完整路径。
+Scanpy 是 Python 生态中最常用的单细胞 RNA-seq 分析框架之一。官方基础教程以 PBMC3k 数据为例，展示了从读取表达矩阵到聚类、标志基因和细胞类型注释的完整路径。
 
-本教程以官方教程为主线，同时补充一些实践判断：QC 阈值不要机械照抄、过滤最好按样本分布看、doublet 和低质量细胞要分开理解、归一化选择要服务下游任务。
+本教程以官方教程为主线，同时补充一些实践判断：QC 阈值不要机械照抄、过滤最好按样本分布看、双细胞和低质量细胞要分开理解、归一化选择要服务下游任务。
 
 <div class="scanpy-panel">
   <div>
-    <span class="eyebrow">Scanpy Workflow</span>
+    <span class="eyebrow">Scanpy 流程</span>
     <h2>一个标准分析闭环</h2>
-    <p>读入数据后，先确认 AnnData 结构，再计算 QC 指标、过滤低质量细胞和低表达基因，随后归一化、log 转换、选择高变基因，最后进入 PCA、邻居图、UMAP、Leiden 和 marker gene 注释。</p>
+    <p>读入数据后，先确认 AnnData 结构，再计算 QC 指标、过滤低质量细胞和低表达基因，随后归一化、对数转换、选择高变基因，最后进入 PCA、邻居图、UMAP、Leiden 和标志基因注释。</p>
   </div>
   <div class="metrics">
     <span>数据容器 <strong>AnnData</strong></span>
@@ -28,11 +28,11 @@ Scanpy 是 Python 生态中最常用的单细胞 RNA-seq 分析框架之一。�
   </a>
   <a href="/tools/scanpy/qc-preprocessing">
     <strong>质控与预处理</strong>
-    <span>计算 QC 指标、处理 doublet、归一化、log1p、高变基因选择和 scale。</span>
+    <span>计算 QC 指标、处理双细胞、归一化、log1p、高变基因选择和标准化。</span>
   </a>
   <a href="/tools/scanpy/clustering-annotation">
     <strong>降维、聚类与注释</strong>
-    <span>PCA、neighbors、UMAP、Leiden、marker gene 和细胞类型命名。</span>
+    <span>PCA、邻居图、UMAP、Leiden、标志基因和细胞类型命名。</span>
   </a>
   <a href="/tools/scanpy/practical-notes">
     <strong>经验与排坑</strong>
@@ -73,4 +73,3 @@ sc.tl.rank_genes_groups(adata, "leiden", method="wilcoxon")
   <strong>不要把这段代码当作万能模板</strong>
   <p>PBMC3k 的阈值和参数适合教学，不等于适合所有组织、平台、物种或疾病队列。真实项目必须回到每个样本的 QC 分布和实验设计。</p>
 </div>
-

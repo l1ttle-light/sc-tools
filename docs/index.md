@@ -39,7 +39,7 @@
   </a>
   <a href="/practice/">
     <strong>4. 实战模拟</strong>
-    <span>从公开 PBMC 数据开始，生成 processed h5ad、marker 表、UMAP 图和 QC 报告。</span>
+    <span>从公开 PBMC 数据开始，生成处理后的 h5ad、标志基因表、UMAP 图和 QC 报告。</span>
   </a>
   <a href="/references/">
     <strong>参考资料</strong>
@@ -49,7 +49,7 @@
 
 ## 生物学知识
 
-这一部分负责回答“这些数据代表什么”。单细胞数据的每一个 cluster、marker 和通路解释，都应该能回到分子信息流、测序技术和组织微环境。
+这一部分负责回答“这些数据代表什么”。单细胞数据的每一个细胞群、标志基因和通路解释，都应该能回到分子信息流、测序技术和组织微环境。
 
 <div class="path-grid">
   <a href="/biology/central-dogma-omics">
@@ -62,7 +62,7 @@
   </a>
   <a href="/biology/common-cell-types">
     <strong>常见细胞类型</strong>
-    <span>整理常见免疫、上皮、内皮、基质、神经和血液细胞的功能与 marker gene。</span>
+    <span>整理常见免疫、上皮、内皮、基质、神经和血液细胞的功能与标志基因。</span>
   </a>
   <a href="/biology/immunology-microenvironment">
     <strong>免疫系统与微环境</strong>
@@ -76,28 +76,28 @@
 
 ## 单细胞相关工具
 
-工具部分负责回答“怎么把数据处理成可以解释的证据”。第一阶段围绕 AnnData, Scanpy, Seurat, and scvi-tools，把官方教程与实践经验整理成中文路径。
+工具部分负责回答“怎么把数据处理成可以解释的证据”。第一阶段围绕 AnnData、Scanpy、Seurat 和 scvi-tools，把官方教程与实践经验整理成中文路径。
 
 <div class="path-grid">
   <a href="/tools/anndata/">
     <strong>AnnData 教程</strong>
-    <span>理解 h5ad, X, obs, var, layers, raw, obsm, and uns，先把数据容器吃透。</span>
+    <span>理解 h5ad、X、obs、var、layers、raw、obsm 和 uns，先把数据容器吃透。</span>
   </a>
   <a href="/tools/scanpy/">
     <strong>Scanpy 教程</strong>
-    <span>从 AnnData 到 QC、归一化、高变基因、PCA、neighbors、UMAP、Leiden 和 marker gene。</span>
+    <span>从 AnnData 到 QC、归一化、高变基因、邻居图、UMAP、Leiden 聚类和标志基因。</span>
   </a>
   <a href="/tools/seurat/">
     <strong>Seurat 教程</strong>
-    <span>学习 R 生态里的 PBMC 标准流程、Seurat object、metadata、clusters 和 marker gene。</span>
+    <span>学习 R 生态里的 PBMC 标准流程、Seurat 对象、元数据、细胞群和标志基因。</span>
   </a>
   <a href="/tools/scvi-tools/">
     <strong>scvi-tools 教程</strong>
-    <span>用深度生成模型处理 batch integration, latent space, differential expression, and annotation transfer。</span>
+    <span>用深度生成模型处理批次整合、潜空间、差异表达和注释迁移。</span>
   </a>
   <a href="/tools/common-tools/">
     <strong>常用工具清单</strong>
-    <span>CellTypist, Squidpy, scVelo, Scrublet, decoupler, inferCNV, and Muon 的定位与使用场景。</span>
+    <span>CellTypist、Squidpy、scVelo、Scrublet、decoupler、inferCNV 和 Muon 的定位与使用场景。</span>
   </a>
 </div>
 
@@ -112,11 +112,11 @@
   </a>
   <a href="/algorithms/harmony/">
     <strong>Harmony</strong>
-    <span>拆解 batch integration 的输入输出、迭代优化、官方代码入口和结果解释。</span>
+    <span>拆解批次整合的输入输出、迭代优化、官方代码入口和结果解释。</span>
   </a>
   <a href="/algorithms/scvi/">
     <strong>scVI</strong>
-    <span>理解深度生成模型如何从 raw counts 学习 latent space、归一化表达和差异表达结果。</span>
+    <span>理解深度生成模型如何从原始计数学习潜空间、归一化表达和差异表达结果。</span>
   </a>
   <a href="/algorithms/template/">
     <strong>算法解读模板</strong>
@@ -131,7 +131,7 @@
 <div class="lesson-feature">
   <span class="feature-index">RUN</span>
   <div>
-    <h2>从公开 PBMC 数据到 h5ad、marker 表、UMAP 图和 QC 报告</h2>
+    <h2>从公开 PBMC 数据到 h5ad、标志基因表、UMAP 图和 QC 报告</h2>
     <p>模板包含 config、scripts、results 目录设计，以及一组可运行的 Python 脚本。默认使用 Scanpy 内置 PBMC3k 公共数据，方便快速复现。</p>
     <a href="/practice/raw-matrix-to-report">进入实战模板</a>
   </div>

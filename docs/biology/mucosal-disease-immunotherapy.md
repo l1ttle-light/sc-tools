@@ -4,14 +4,14 @@
 
 ## 黏膜免疫
 
-黏膜是免疫系统最繁忙的界面之一：它持续接触食物、空气、共生菌和病原体。黏膜免疫的重点不是“一直强烈炎症”，而是屏障保护、IgA、组织驻留细胞、微生物群调控和 oral tolerance 的平衡。
+黏膜是免疫系统最繁忙的界面之一：它持续接触食物、空气、共生菌和病原体。黏膜免疫的重点不是“一直强烈炎症”，而是屏障保护、IgA、组织驻留细胞、微生物群调控和口服耐受的平衡。
 
 | 模块 | 功能 | 单细胞线索 |
 |---|---|---|
-| epithelial barrier | 物理隔离、抗菌分子、危险信号释放。 | epithelial stress, `DEFA*`, `REG*`, interferon genes。 |
-| secretory IgA | 中和和限制微生物黏附，降低炎症性清除需求。 | `JCHAIN`, `IGHA1`, `IGHA2`, plasma cells。 |
-| tissue-resident lymphocytes | 快速局部保护与组织监视。 | `ITGAE`, `CXCR6`, `ZNF683`, `CD69`。 |
-| microbiota regulation | 塑造局部和系统免疫状态。 | myeloid activation, Th17/ILC3 program, barrier genes。 |
+| 上皮屏障 | 物理隔离、抗菌分子、危险信号释放。 | 上皮应激、`DEFA*`, `REG*`、干扰素相关基因。 |
+| 分泌型 IgA | 中和和限制微生物黏附，降低炎症性清除需求。 | `JCHAIN`, `IGHA1`, `IGHA2`、浆细胞。 |
+| 组织驻留淋巴细胞 | 快速局部保护与组织监视。 | `ITGAE`, `CXCR6`, `ZNF683`, `CD69`。 |
+| 微生物群调控 | 塑造局部和系统免疫状态。 | 髓系细胞活化、Th17/ILC3 程序、屏障基因。 |
 
 ## 免疫防御失败
 
@@ -19,60 +19,60 @@
 
 | 缺陷类型 | 易感问题 | 机制理解 |
 |---|---|---|
-| T cell / combined immunodeficiency | viral, fungal, opportunistic infections | T cell help、细胞毒性和免疫协调不足。 |
-| B cell / antibody deficiency | extracellular bacteria, some viruses | 中和、opsonization 和 complement activation 不足。 |
-| phagocyte defects | bacterial and fungal dissemination | 摄取、氧爆发或趋化迁移不足。 |
-| complement defects | encapsulated bacteria, immune complex disease | opsonization、裂解和免疫复合物清除不足。 |
+| T 细胞/联合免疫缺陷 | 病毒、真菌、机会性感染 | T 细胞辅助、细胞毒性和免疫协调不足。 |
+| B 细胞/抗体缺陷 | 胞外细菌、部分病毒 | 中和、调理作用和补体活化不足。 |
+| 吞噬细胞缺陷 | 细菌和真菌播散 | 摄取、氧爆发或趋化迁移不足。 |
+| 补体缺陷 | 荚膜细菌、免疫复合物病 | 调理作用、裂解和免疫复合物清除不足。 |
 
 ## 过敏和超敏反应
 
-过敏可以理解为免疫系统对无害抗原产生了过强或错误类型的效应应答。IgE-mediated allergy 中，Th2/Tfh 信号推动 IgE 产生；IgE 固定在 mast cells 和 basophils 的 Fc epsilon receptor 上，再次遇到 allergen 时快速脱颗粒。
+过敏可以理解为免疫系统对无害抗原产生了过强或错误类型的效应应答。在 IgE 介导的过敏中，Th2/Tfh 信号推动 IgE 产生；IgE 固定在肥大细胞和嗜碱性粒细胞的 Fc epsilon 受体上，再次遇到变应原时快速脱颗粒。
 
 <div class="check-grid">
   <article>
-    <strong>IgE / mast cell axis</strong>
-    <span>快速释放 histamine、lipid mediators 和 cytokines，造成鼻炎、哮喘、荨麻疹或 anaphylaxis。</span>
+    <strong>IgE / 肥大细胞轴</strong>
+    <span>快速释放组胺、脂质介质和细胞因子，造成鼻炎、哮喘、荨麻疹或过敏性休克。</span>
   </article>
   <article>
-    <strong>Eosinophils</strong>
+    <strong>嗜酸性粒细胞</strong>
     <span>参与寄生虫防御，也可在过敏性炎症中造成组织损伤。</span>
   </article>
   <article>
-    <strong>Immune complex</strong>
+    <strong>免疫复合物</strong>
     <span>大量难清除抗原-抗体复合物可诱发补体和炎症损伤。</span>
   </article>
   <article>
-    <strong>Delayed-type hypersensitivity</strong>
-    <span>Th1 和 CD8 T cells 可介导迟发型组织炎症。</span>
+    <strong>迟发型超敏反应</strong>
+    <span>Th1 和 CD8 T 细胞可介导迟发型组织炎症。</span>
   </article>
 </div>
 
 ## 自身免疫和移植
 
-自身免疫来自耐受机制被突破：遗传易感、MHC、感染、组织损伤、分子模拟、免疫豁免区暴露、随机克隆事件都可能参与。移植免疫则是免疫系统把同种异体 MHC 或其呈递的 peptide 识别为危险信号。
+自身免疫来自耐受机制被突破：遗传易感、MHC、感染、组织损伤、分子模拟、免疫豁免区暴露、随机克隆事件都可能参与。移植免疫则是免疫系统把同种异体 MHC 或其呈递的抗原肽识别为危险信号。
 
 | 场景 | 核心机制 | 单细胞关注点 |
 |---|---|---|
-| organ-specific autoimmunity | 自身抗原局部靶向。 | autoreactive T/B cells, tissue-resident inflammation。 |
-| systemic autoimmunity | immune complex、广泛炎症和多器官损伤。 | plasmablast expansion, interferon program, myeloid activation。 |
-| acute rejection | T cell-mediated alloreactivity。 | cytotoxic T cells, APC activation, endothelial inflammation。 |
-| chronic rejection | 持续低度损伤、血管和纤维化改变。 | macrophage/fibroblast/endothelial states。 |
+| 器官特异性自身免疫 | 自身抗原局部靶向。 | 自身反应性 T/B 细胞、组织驻留炎症。 |
+| 系统性自身免疫 | 免疫复合物、广泛炎症和多器官损伤。 | 浆母细胞扩增、干扰素程序、髓系细胞活化。 |
+| 急性排斥 | T 细胞介导的同种异体反应。 | 细胞毒性 T 细胞、抗原提呈细胞活化、内皮炎症。 |
+| 慢性排斥 | 持续低度损伤、血管和纤维化改变。 | 巨噬细胞、成纤维细胞和内皮细胞状态。 |
 
 ## 疫苗和肿瘤免疫治疗
 
-疫苗的目标是安全地产生长期保护性免疫，通常需要抗原、合适的递送方式、佐剂和记忆细胞形成。肿瘤免疫治疗则利用或增强抗肿瘤免疫，包括 monoclonal antibodies、checkpoint blockade、CAR-T cells 和 cancer vaccines。
+疫苗的目标是安全地产生长期保护性免疫，通常需要抗原、合适的递送方式、佐剂和记忆细胞形成。肿瘤免疫治疗则利用或增强抗肿瘤免疫，包括单克隆抗体、免疫检查点阻断、CAR-T 细胞和肿瘤疫苗。
 
 <div class="doc-callout important">
   <strong>肿瘤免疫治疗看的是系统</strong>
-  <p>checkpoint blockade 是否有效，不只取决于 T cell 是否表达 PD-1，还取决于 antigen presentation、T cell infiltration、Treg 和 myeloid suppression、肿瘤抗原负荷、空间排斥和组织代谢环境。</p>
+  <p>免疫检查点阻断是否有效，不只取决于 T 细胞是否表达 PD-1，还取决于抗原提呈、T 细胞浸润、Treg 和髓系抑制、肿瘤抗原负荷、空间排斥和组织代谢环境。</p>
 </div>
 
 ## 自检问题
 
 1. 黏膜免疫为什么必须同时容忍共生菌和清除病原体？
 2. 不同免疫缺陷为什么对应不同感染谱？
-3. IgE-mediated allergy 的致敏阶段和效应阶段有什么区别？
-4. checkpoint blockade 为什么不是只看 `PDCD1` 或 `CD274` 表达？
+3. IgE 介导的过敏中，致敏阶段和效应阶段有什么区别？
+4. 免疫检查点阻断为什么不是只看 `PDCD1` 或 `CD274` 表达？
 
 ## 参考资料
 

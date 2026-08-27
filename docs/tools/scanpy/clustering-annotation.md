@@ -40,14 +40,14 @@ sc.pl.umap(adata, color=["leiden"])
   </article>
 </div>
 
-## Marker gene
+## 标志基因
 
 ```python
 sc.tl.rank_genes_groups(adata, "leiden", method="wilcoxon")
 sc.pl.rank_genes_groups(adata, n_genes=25, sharey=False)
 ```
 
-Marker gene 是注释细胞类型的证据，而不是直接答案。更可靠的注释通常来自多种证据：经典 marker、差异基因、样本来源、已知组织结构、参考图谱和自动注释工具。
+标志基因是注释细胞类型的证据，而不是直接答案。更可靠的注释通常来自多种证据：经典标志基因、差异基因、样本来源、已知组织结构、参考图谱和自动注释工具。
 
 ## 命名细胞类型
 
@@ -64,13 +64,12 @@ sc.pl.umap(adata, color=["cell_type"])
 
 <div class="doc-callout example">
   <strong>注释时要保留不确定性</strong>
-  <p>如果一个 cluster 同时表达多个谱系 marker，先标成 ambiguous 或 mixed，比强行命名更诚实。后续可以回查 doublet、批次、细胞周期或亚群分辨率。</p>
+  <p>如果一个细胞群同时表达多个谱系标志基因，先标成不确定或混合，比强行命名更诚实。后续可以回查双细胞、批次、细胞周期或亚群分辨率。</p>
 </div>
 
 ## 自检问题
 
-1. PCA、neighbors、UMAP、Leiden 之间是什么关系？
+1. PCA、邻居图、UMAP、Leiden 之间是什么关系？
 2. 为什么 UMAP 上看起来分开的点群不一定等于真实细胞类型？
-3. `resolution` 变大后 cluster 变多，应该如何判断是否合理？
-4. marker gene 注释为什么需要结合组织背景？
-
+3. `resolution` 变大后细胞群变多，应该如何判断是否合理？
+4. 标志基因注释为什么需要结合组织背景？

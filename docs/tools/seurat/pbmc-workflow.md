@@ -1,6 +1,6 @@
 # PBMC 标准流程
 
-这一页按 Seurat 官方 PBMC 3K tutorial 的逻辑组织。代码用 R，概念尽量和 Scanpy 对照。
+这一页按 Seurat 官方 PBMC 3K 教程的逻辑组织。代码用 R，概念尽量和 Scanpy 对照。
 
 ## 读取数据与创建对象
 
@@ -32,10 +32,10 @@ pbmc <- subset(pbmc, subset = nFeature_RNA > 200 & nFeature_RNA < 2500 & percent
 
 <div class="doc-callout warning">
   <strong>不要直接照抄阈值</strong>
-  <p>PBMC3K 的 <code>nFeature_RNA < 2500</code> 和 <code>percent.mt < 5</code> 是教学示例。真实项目应按 sample, tissue, chemistry, and sequencing depth 分开检查 QC 分布。</p>
+  <p>PBMC3K 的 <code>nFeature_RNA < 2500</code> 和 <code>percent.mt < 5</code> 是教学示例。真实项目应按样本、组织、建库化学体系和测序深度分开检查 QC 分布。</p>
 </div>
 
-## 归一化、高变基因和 scale
+## 归一化、高变基因和标准化
 
 ```r
 pbmc <- NormalizeData(pbmc, normalization.method = "LogNormalize", scale.factor = 10000)
@@ -45,9 +45,9 @@ all.genes <- rownames(pbmc)
 pbmc <- ScaleData(pbmc, features = all.genes)
 ```
 
-Scanpy 中对应 `normalize_total()`, `log1p()`, `highly_variable_genes()`, and `scale()`。
+Scanpy 中对应 `normalize_total()`、`log1p()`、`highly_variable_genes()` 和 `scale()`。
 
-## PCA、neighbors、clusters、UMAP
+## PCA、邻居图、细胞群和 UMAP
 
 ```r
 pbmc <- RunPCA(pbmc, features = VariableFeatures(object = pbmc))
@@ -60,7 +60,7 @@ DimPlot(pbmc, reduction = "umap")
 
 Seurat 的 `FindNeighbors()` + `FindClusters()` 和 Scanpy 的 `pp.neighbors()` + `tl.leiden()` 在分析语义上相似：先建图，再在图上找社区。
 
-## Marker gene
+## 标志基因
 
 ```r
 cluster.markers <- FindAllMarkers(
@@ -71,33 +71,32 @@ cluster.markers <- FindAllMarkers(
 )
 ```
 
-实践中不要只用 marker 表自动命名。更可靠的命名需要结合经典 marker、组织背景、样本分组、是否存在 doublet、是否是 cell cycle 或 stress 状态。
+实践中不要只用标志基因表自动命名。更可靠的命名需要结合经典标志基因、组织背景、样本分组、是否存在双细胞、是否是细胞周期或应激状态。
 
-## Seurat object 和 AnnData 对照
+## Seurat 对象和 AnnData 对照
 
 <div class="check-grid">
   <article>
     <strong>counts/data/scale.data</strong>
-    <span>大致对应 AnnData 中 counts layer, normalized/log X, and scaled matrix 的角色。</span>
+    <span>大致对应 AnnData 中计数层、归一化/对数转换后的 X 和标准化矩阵。</span>
   </article>
   <article>
     <strong>meta.data</strong>
-    <span>对应 AnnData 的 obs，用来保存 sample, QC metrics, clusters, and cell type。</span>
+    <span>对应 AnnData 的 obs，用来保存样本、QC 指标、细胞群和细胞类型。</span>
   </article>
   <article>
     <strong>reductions</strong>
-    <span>对应 AnnData 的 obsm/uns，保存 PCA, UMAP, and related loadings。</span>
+    <span>对应 AnnData 的 obsm/uns，保存 PCA、UMAP 和相关载荷。</span>
   </article>
   <article>
     <strong>assays/layers</strong>
-    <span>Seurat v5 里 layer 更重要，整合和多样本分析时要确认 active assay and layer。</span>
+    <span>Seurat v5 里 layer 更重要，整合和多样本分析时要确认当前 assay 和 layer。</span>
   </article>
 </div>
 
 ## 自检问题
 
-1. `nFeature_RNA`, `nCount_RNA`, and `percent.mt` 分别对应什么 QC 含义？
+1. `nFeature_RNA`、`nCount_RNA` 和 `percent.mt` 分别对应什么 QC 含义？
 2. `FindVariableFeatures()` 会影响后续哪些步骤？
-3. `resolution` 变大时 cluster 数会如何变化？
-4. Seurat object 和 AnnData 互转时最容易丢哪些信息？
-
+3. `resolution` 变大时细胞群数量会如何变化？
+4. Seurat 对象和 AnnData 互转时最容易丢哪些信息？

@@ -10,7 +10,7 @@
     <span>读基因组变异、结构变异、拷贝数变化和克隆关系。</span>
   </article>
   <article>
-    <strong>bulk RNA-seq</strong>
+    <strong>群体 RNA-seq（bulk RNA-seq）</strong>
     <span>读样本平均表达，适合差异表达、通路和剪接分析。</span>
   </article>
   <article>
@@ -33,15 +33,15 @@
 
 ## scRNA-seq 的基本原理
 
-多数高通量 scRNA-seq 流程可以拆成五步：单细胞分隔、mRNA 捕获、反转录、细胞 barcode 和 UMI 标记、测序后按 barcode 还原表达矩阵。Tang 等人在 2009 年展示了单细胞 mRNA-seq 的早期路线，后续微流控和液滴技术让单细胞转录组进入高通量阶段 [1]。
+多数高通量 scRNA-seq 流程可以拆成五步：单细胞分隔、mRNA 捕获、反转录、细胞条形码和 UMI 标记、测序后按条形码还原表达矩阵。Tang 等人在 2009 年展示了单细胞 mRNA-seq 的早期路线，后续微流控和液滴技术让单细胞转录组进入高通量阶段 [1]。
 
 <div class="flow-strip">
   <span>分隔单细胞</span>
   <span>捕获 mRNA</span>
-  <span>加入 barcode/UMI</span>
+  <span>加入条形码/UMI</span>
   <span>建库测序</span>
   <span>比对或伪比对</span>
-  <span>生成 count matrix</span>
+  <span>生成计数矩阵</span>
   <span>质控与过滤</span>
   <span>下游分析</span>
 </div>
@@ -64,15 +64,15 @@ CITE-seq 通过寡核苷酸标记抗体同时读取 RNA 和表面蛋白，适合
 
 <div class="doc-callout warning">
   <strong>技术选择决定问题边界</strong>
-  <p>scRNA-seq 很适合发现细胞状态，但不擅长直接证明蛋白活性；空间转录组适合组织定位，但不同平台的单细胞分辨率差异很大；ATAC-seq 能提示调控潜力，但需要和表达、motif、footprint 等证据一起解释。</p>
+  <p>scRNA-seq 很适合发现细胞状态，但不擅长直接证明蛋白活性；空间转录组适合组织定位，但不同平台的单细胞分辨率差异很大；ATAC-seq 能提示调控潜力，但需要和表达、转录因子结合基序、染色质足迹等证据一起解释。</p>
 </div>
 
 ## 自检问题
 
-1. barcode 和 UMI 分别解决什么问题？
-2. 为什么 scRNA-seq count matrix 不是原始生物分子状态的完整复制？
+1. 条形码和 UMI 分别解决什么问题？
+2. 为什么 scRNA-seq 计数矩阵不是原始生物分子状态的完整复制？
 3. ATAC-seq 的信号为什么可以反映染色质开放？
-4. 空间转录组和 dissociation-based scRNA-seq 各自失去了什么信息？
+4. 空间转录组和基于组织解离的 scRNA-seq 各自失去了什么信息？
 
 ## 参考文献
 

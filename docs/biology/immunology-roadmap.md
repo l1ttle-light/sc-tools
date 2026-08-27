@@ -19,10 +19,10 @@
 
 | 教材主线 | 网站专题 | 学习目标 | 单细胞分析中的用途 |
 |---|---|---|---|
-| 免疫生物学和固有免疫概论 | [固有免疫](/biology/innate-immunity) | 理解屏障、补体、PRR、炎症、干扰素、NK 和 ILC。 | 解释 monocyte/macrophage/DC/neutrophil 的炎症状态和抗病毒程序。 |
-| 抗原的识别 | [抗原识别与抗原提呈](/biology/antigen-recognition-presentation) | 理解 BCR、TCR、MHC-I、MHC-II、交叉提呈和非经典提呈。 | 判断 APC、T cell activation、TCR clonotype 和抗原特异性线索。 |
-| 成熟淋巴细胞受体库的产生 | [淋巴细胞发育与活化](/biology/lymphocyte-development-activation) | 理解 V(D)J 重排、B/T 细胞选择、TCR/BCR signaling 和 checkpoint。 | 解释 naive、memory、Treg、plasma cell、cycling lymphocyte 等状态。 |
-| 适应性免疫应答 | [适应性免疫应答](/biology/adaptive-effector-immunity) | 理解 T cell priming、CD4/CD8 分化、B cell 生发中心和抗体功能。 | 支撑 T cell subtype、B cell maturation、effector gene program 的注释。 |
+| 免疫生物学和固有免疫概论 | [固有免疫](/biology/innate-immunity) | 理解屏障、补体、模式识别受体、炎症、干扰素、NK 和固有淋巴样细胞。 | 解释单核细胞、巨噬细胞、树突细胞和中性粒细胞的炎症状态和抗病毒程序。 |
+| 抗原的识别 | [抗原识别与抗原提呈](/biology/antigen-recognition-presentation) | 理解 BCR、TCR、MHC-I、MHC-II、交叉提呈和非经典提呈。 | 判断抗原提呈细胞、T 细胞活化、TCR 克隆型和抗原特异性线索。 |
+| 成熟淋巴细胞受体库的产生 | [淋巴细胞发育与活化](/biology/lymphocyte-development-activation) | 理解 V(D)J 重排、B/T 细胞选择、TCR/BCR 信号和免疫检查点。 | 解释初始、记忆、Treg、浆细胞、增殖中淋巴细胞等状态。 |
+| 适应性免疫应答 | [适应性免疫应答](/biology/adaptive-effector-immunity) | 理解 T 细胞启动、CD4/CD8 分化、B 细胞生发中心和抗体功能。 | 支撑 T 细胞亚型、B 细胞成熟和效应基因程序的注释。 |
 | 健康与疾病中的免疫系统 | [黏膜免疫、疾病与治疗](/biology/mucosal-disease-immunotherapy) | 理解免疫缺陷、过敏、自身免疫、移植、疫苗和肿瘤免疫治疗。 | 把单细胞发现放回疾病机制、治疗响应和组织微环境。 |
 
 ## 免疫学最小概念集
@@ -30,11 +30,11 @@
 <div class="check-grid">
   <article>
     <strong>识别</strong>
-    <span>固有免疫主要识别 conserved microbial patterns 和 tissue damage；适应性免疫通过 BCR/TCR 识别高度特异的抗原。</span>
+    <span>固有免疫主要识别保守的微生物模式和组织损伤；适应性免疫通过 BCR/TCR 识别高度特异的抗原。</span>
   </article>
   <article>
     <strong>放大</strong>
-    <span>细胞因子、趋化因子、补体和 clonal expansion 把局部信号变成系统性或组织级应答。</span>
+    <span>细胞因子、趋化因子、补体和克隆扩增把局部信号变成系统性或组织级应答。</span>
   </article>
   <article>
     <strong>效应</strong>
@@ -42,23 +42,23 @@
   </article>
   <article>
     <strong>调控</strong>
-    <span>中枢耐受、外周耐受、Treg、checkpoint receptor 和组织限制机制避免免疫应答伤害宿主。</span>
+    <span>中枢耐受、外周耐受、Treg、免疫检查点受体和组织限制机制避免免疫应答伤害宿主。</span>
   </article>
 </div>
 
 ## 推荐阅读顺序
 
 1. 先读 [常见细胞类型](/biology/common-cell-types)，知道单细胞图上的主要免疫细胞是谁。
-2. 再读 [固有免疫](/biology/innate-immunity)，理解炎症和抗病毒 gene program。
-3. 接着读 [抗原识别与抗原提呈](/biology/antigen-recognition-presentation)，理解 T cell 和 APC 为什么要配对解释。
-4. 然后读 [淋巴细胞发育与活化](/biology/lymphocyte-development-activation)，把 naive、activated、exhausted、Treg、plasma cell 等状态放进谱系。
+2. 再读 [固有免疫](/biology/innate-immunity)，理解炎症和抗病毒基因程序。
+3. 接着读 [抗原识别与抗原提呈](/biology/antigen-recognition-presentation)，理解 T 细胞和抗原提呈细胞为什么要配对解释。
+4. 然后读 [淋巴细胞发育与活化](/biology/lymphocyte-development-activation)，把初始、活化、耗竭、Treg、浆细胞等状态放进谱系。
 5. 最后读 [适应性免疫应答](/biology/adaptive-effector-immunity) 和 [黏膜免疫、疾病与治疗](/biology/mucosal-disease-immunotherapy)，进入疾病和组织场景。
 
 ## 单细胞读图提示
 
 <div class="doc-callout warning">
-  <strong>不要把 marker 当机制本身</strong>
-  <p>marker 可以帮助命名 cluster，但机制判断需要看细胞类型、受体/配体、转录因子、细胞因子、空间位置、样本设计和功能证据。免疫学教材提供的是解释坐标系，而不是替代实验验证的快捷答案。</p>
+  <strong>不要把标志基因当机制本身</strong>
+  <p>标志基因可以帮助命名细胞群，但机制判断需要看细胞类型、受体/配体、转录因子、细胞因子、空间位置、样本设计和功能证据。免疫学教材提供的是解释坐标系，而不是替代实验验证的快捷答案。</p>
 </div>
 
 ## 参考资料

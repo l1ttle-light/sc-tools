@@ -19,7 +19,7 @@
   </article>
   <article>
     <strong>只看 UMAP</strong>
-    <span>UMAP 是可视化，不是统计检验。结论要回到 marker、差异分析和样本层面。</span>
+    <span>UMAP 是可视化，不是统计检验。结论要回到标志基因、差异分析和样本层面。</span>
   </article>
 </div>
 
@@ -57,4 +57,3 @@ adata.write_h5ad("results/pbmc_scanpy_processed.h5ad")
 ## 何时查官方文档
 
 当你开始调整参数、改数据结构或接入新函数时，优先查官方 API 和教程。博客适合补经验，但版本差异很常见，尤其是 AnnData、Scanpy 和 scverse 生态的对象结构。
-

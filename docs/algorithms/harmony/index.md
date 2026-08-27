@@ -1,6 +1,6 @@
 # Harmony
 
-Harmony 是一个用于整合单细胞数据的无监督算法。它的核心思想很明确：不直接修改基因表达矩阵，而是在 PCA 等低维 embedding 上学习 batch/covariate correction，让细胞在低维空间中更多按生物状态聚集，而不是按实验批次、供体、测序平台或组织来源分开 [1]。
+Harmony 是一个用于整合单细胞数据的无监督算法。它的核心思想很明确：不直接修改基因表达矩阵，而是在 PCA 等低维表示上学习批次/协变量校正，让细胞在低维空间中更多按生物状态聚集，而不是按实验批次、供体、测序平台或组织来源分开 [1]。
 
 这篇页面基于论文 *Fast, sensitive and accurate integration of single-cell data with Harmony* 和官方 GitHub 仓库代码整理。
 
@@ -13,19 +13,19 @@ Harmony 是一个用于整合单细胞数据的无监督算法。它的核心思
 | 发表信息 | *Nature Methods*, 2019 |
 | DOI | `10.1038/s41592-019-0619-0` |
 | GitHub 仓库 | `https://github.com/immunogenomics/harmony` |
-| 任务类型 | batch integration / multi-dataset integration / covariate correction |
-| 适用数据 | scRNA-seq low-dimensional embeddings; 论文也展示了跨模态整合场景 |
-| 主要输出 | corrected embedding, usually stored as `harmony`, `X_harmony`, or `reducedDim(..., "HARMONY")` |
+| 任务类型 | 批次整合 / 多数据集整合 / 协变量校正 |
+| 适用数据 | scRNA-seq 低维表示；论文也展示了跨模态整合场景 |
+| 主要输出 | 校正后的低维表示，通常保存为 `harmony`、`X_harmony` 或 `reducedDim(..., "HARMONY")` |
 
 ## 2. 算法作用
 
-Harmony 解决的是“多个单细胞数据集放在一起时，低维空间被 batch/covariate 主导”的问题。它把输入的 PCA embedding 和细胞 metadata 作为输入，输出一个校正后的 embedding。后续的 nearest neighbors、UMAP、clustering、trajectory analysis 都应基于这个校正 embedding 运行。
+Harmony 解决的是“多个单细胞数据集放在一起时，低维空间被批次/协变量主导”的问题。它把 PCA 低维表示和细胞元数据作为输入，输出一个校正后的低维表示。后续的邻居图、UMAP、聚类、轨迹分析都应基于这个校正结果运行。
 
-它不输出 corrected counts，也不应该把 Harmony embedding 当作新的表达矩阵去做 gene-level differential expression。论文讨论里明确建议：差异表达这类问题应使用能显式处理 batch 的统计模型，例如包含 batch/covariate 的线性模型或混合效应模型 [1]。
+它不输出校正后的计数，也不应该把 Harmony 低维表示当作新的表达矩阵去做基因层面的差异表达。论文讨论里明确建议：差异表达这类问题应使用能显式处理批次的统计模型，例如包含批次/协变量的线性模型或混合效应模型 [1]。
 
 <div class="doc-callout important">
   <strong>一句话理解</strong>
-  <p>Harmony 做的是 embedding correction，不是 expression imputation。它让低维空间更适合联合聚类和可视化，但不创造新的基因表达值。</p>
+  <p>Harmony 做的是低维表示校正，不是表达插补。它让低维空间更适合联合聚类和可视化，但不创造新的基因表达值。</p>
 </div>
 
 ## 3. 输入与输出
@@ -34,19 +34,19 @@ Harmony 解决的是“多个单细胞数据集放在一起时，低维空间被
 
 | 输入 | 格式 | 形状/字段 | 必需 | 说明 |
 |---|---|---|---|---|
-| expression matrix | `.h5ad`, `.rds`, `.mtx`, `.loom`, `.csv`, `.tsv` | cells x genes | upstream | Harmony 通常不直接从 raw counts 开始，而是先归一化、找 HVG、PCA。 |
-| PCA/cell embedding | matrix, `adata.obsm["X_pca"]`, Seurat `pca`, SCE `PCA` | cells x PCs | yes | 论文记作 `Z`，实现内部转成 `d x N`。 |
-| cell metadata | `.csv`, `.tsv`, `adata.obs`, Seurat `meta.data`, SCE `colData` | cells x covariates | yes | 必须包含要校正的分类变量，例如 `batch`, `donor`, `platform`, `chemistry`。 |
-| covariate list | string/list | column names | yes | R 接口为 `group.by.vars` 或 `vars_use`。 |
+| 表达矩阵 | `.h5ad`, `.rds`, `.mtx`, `.loom`, `.csv`, `.tsv` | 细胞 x 基因 | 上游需要 | Harmony 通常不直接从原始计数开始，而是先归一化、找高变基因、PCA。 |
+| PCA/细胞低维表示 | matrix, `adata.obsm["X_pca"]`, Seurat `pca`, SCE `PCA` | 细胞 x PC | 是 | 论文记作 `Z`，实现内部转成 `d x N`。 |
+| 细胞元数据 | `.csv`, `.tsv`, `adata.obs`, Seurat `meta.data`, SCE `colData` | 细胞 x 协变量 | 是 | 必须包含要校正的分类变量，例如 `batch`, `donor`, `platform`, `chemistry`。 |
+| 协变量列表 | string/list | 列名 | 是 | R 接口为 `group.by.vars` 或 `vars_use`。 |
 
 ### 输出文件
 
 | 输出 | 格式 | 形状/字段 | 用途 |
 |---|---|---|---|
-| corrected embedding | matrix, `adata.obsm["X_harmony"]`, Seurat reduction, SCE reducedDim | cells x PCs | downstream neighbors/UMAP/clustering |
-| convergence trace | plot/data in object | objective values | 检查优化是否稳定。 |
-| soft cluster assignment | R6 object field `R` when `return_object=TRUE` | clusters x cells | 解释每个细胞属于多个 cluster 的权重。 |
-| co-occurrence statistics | R6 object fields `O`, `E` | clusters x batches | 理解 diversity penalty 的 observed/expected batch composition。 |
+| 校正后的低维表示 | matrix, `adata.obsm["X_harmony"]`, Seurat reduction, SCE reducedDim | 细胞 x PC | 下游邻居图/UMAP/聚类 |
+| 收敛轨迹 | 对象中的图或数据 | 目标函数值 | 检查优化是否稳定。 |
+| 软聚类分配 | `return_object=TRUE` 时的 R6 对象字段 `R` | 细胞群 x 细胞 | 解释每个细胞属于多个细胞群的权重。 |
+| 共现统计量 | R6 对象字段 `O`, `E` | 细胞群 x 批次 | 理解多样性惩罚中的观测/期望批次组成。 |
 
 ## 4. 算法流程图
 
@@ -70,22 +70,22 @@ function harmonize(Z, Phi)
 
 | 符号 | 代码中对应 | 形状 | 含义 |
 |---|---|---|---|
-| `Z` | `Z_orig` | `d x N` | 原始 PCA/cell embedding。 |
-| `Z_hat`, `Z_corr` | `Z_corr` | `d x N` | 当前校正后的 embedding。 |
-| `Phi` | `Phi` | `B x N` | batch/covariate one-hot design matrix。 |
-| `R` | `R` | `K x N` | soft cluster assignment，每个细胞可同时属于多个 cluster。 |
-| `Y` | `Y` | `d x K` | cluster centroids。 |
-| `O` | `O` | `K x B` | observed cluster-batch co-occurrence。 |
-| `E` | `E` | `K x B` | expected co-occurrence under independence。 |
-| `theta` | `theta` | per covariate level | 控制 batch diversity penalty 强度。 |
-| `sigma` | `sigma` | per cluster | 控制 soft k-means 的软硬程度。 |
-| `lambda` | `lambda` | per covariate level | ridge penalty，越大越保守，越不容易 over-correct。 |
+| `Z` | `Z_orig` | `d x N` | 原始 PCA/细胞低维表示。 |
+| `Z_hat`, `Z_corr` | `Z_corr` | `d x N` | 当前校正后的低维表示。 |
+| `Phi` | `Phi` | `B x N` | 批次/协变量的独热设计矩阵。 |
+| `R` | `R` | `K x N` | 软聚类分配，每个细胞可同时属于多个细胞群。 |
+| `Y` | `Y` | `d x K` | 细胞群中心。 |
+| `O` | `O` | `K x B` | 观测到的细胞群-批次共现。 |
+| `E` | `E` | `K x B` | 独立假设下期望的共现。 |
+| `theta` | `theta` | 每个协变量水平 | 控制批次多样性惩罚强度。 |
+| `sigma` | `sigma` | 每个细胞群 | 控制软 k-means 的软硬程度。 |
+| `lambda` | `lambda` | 每个协变量水平 | 岭惩罚，越大越保守，越不容易过度校正。 |
 
-### 5.2 第一步：maximum diversity clustering
+### 5.2 第一步：最大多样性聚类
 
-Harmony 先在当前 embedding 上做 soft k-means。与普通 k-means 不同，`R` 是概率分配矩阵，而不是每个细胞只有一个硬标签。这样做的好处是保留连续状态，例如 differentiation trajectory 或 activation gradient。
+Harmony 先在当前低维表示上做软 k-means。与普通 k-means 不同，`R` 是概率分配矩阵，而不是每个细胞只有一个硬标签。这样做的好处是保留连续状态，例如分化轨迹或激活梯度。
 
-论文在 soft k-means 的距离项之外加入 diversity penalty。直观上，如果某个 cluster 里某个 batch 明显过多，Harmony 会降低这个 batch 的细胞继续进入该 cluster 的概率；如果某个 batch 在该 cluster 中不足，则会提高它进入的机会。代码中对应：
+论文在软 k-means 的距离项之外加入多样性惩罚。直观上，如果某个细胞群里某个批次明显过多，Harmony 会降低这个批次的细胞继续进入该细胞群的概率；如果某个批次在该细胞群中不足，则会提高它进入的机会。代码中对应：
 
 ```text
 dist_mat = 2 * (1 - Y.t() * Z_corr)
@@ -94,25 +94,25 @@ O = R * Phi_t
 Rcells = exp(-dist / sigma) * diversity_score
 ```
 
-实际实现入口在 `src/harmony.cpp` 的 `cluster_cpp()` 和 `update_R()`。其中 `update_R()` 会分 block 更新细胞，先暂时移除一批细胞对 `O` 和 `E` 的贡献，再用新的 diversity score 更新这些细胞的 `R`，最后把它们加回统计量。
+实际实现入口在 `src/harmony.cpp` 的 `cluster_cpp()` 和 `update_R()`。其中 `update_R()` 会分块更新细胞，先暂时移除一批细胞对 `O` 和 `E` 的贡献，再用新的多样性分数更新这些细胞的 `R`，最后把它们加回统计量。
 
-### 5.3 第二步：mixture-of-experts ridge correction
+### 5.3 第二步：混合专家岭回归校正
 
-聚类后，Harmony 在每个 cluster 内估计 batch effect。这里可以理解为“每个 cluster 是一个 expert”，每个 expert 都学习一组 batch/covariate 的线性校正项；细胞最终的校正值是多个 experts 按 `R` 加权后的结果。
+聚类后，Harmony 在每个细胞群内估计批次效应。这里可以理解为“每个细胞群是一个专家”，每个专家都学习一组批次/协变量的线性校正项；细胞最终的校正值是多个专家按 `R` 加权后的结果。
 
-论文强调 correction step 使用原始 `Z` 估计校正，而不是持续在已经校正过的 `Z_corr` 上叠加回归。这样可以减少过度校正风险。代码中 `moe_correct_ridge_cpp()` 一开始就执行：
+论文强调校正步骤使用原始 `Z` 估计校正，而不是持续在已经校正过的 `Z_corr` 上叠加回归。这样可以减少过度校正风险。代码中 `moe_correct_ridge_cpp()` 一开始就执行：
 
 ```text
 Z_corr = Z_orig
 ```
 
-随后对每个 cluster `k` 拟合 ridge regression：
+随后对每个细胞群 `k` 拟合岭回归：
 
 ```text
 W_k = (Phi* diag(R_k) Phi*^T + lambda I)^-1 Phi* diag(R_k) Z_orig^T
 ```
 
-其中 `Phi*` 是带 intercept 的 design matrix。实现里会保留 intercept，不从 embedding 中移除全局 cluster centroid，只移除 batch/covariate 相关项：
+其中 `Phi*` 是带截距的设计矩阵。实现里会保留截距，不从低维表示中移除全局细胞群中心，只移除批次/协变量相关项：
 
 ```text
 Y.col(k) = W.row(0).t()
@@ -122,7 +122,7 @@ Z_corr -= W.t() * Phi_Rk
 
 ### 5.4 收敛判断
 
-Harmony 有两层收敛：clustering 内部用 k-means objective 的窗口变化判断；外层 harmonization 用 correction 前后的 objective 变化判断。R 层 `harmonize()` 每轮调用：
+Harmony 有两层收敛：聚类内部用 k-means 目标函数的窗口变化判断；外层整合用校正前后的目标函数变化判断。R 层 `harmonize()` 每轮调用：
 
 ```text
 harmonyObj$cluster_cpp()
@@ -138,11 +138,11 @@ harmonyObj$check_convergence(1)
 |---|---|---|---|
 | 用户入口 | `R/RunHarmony.R` | Seurat、SingleCellExperiment 和 default API。 | `RunHarmony.Seurat()`, `RunHarmony.SingleCellExperiment()` |
 | 参数与主入口 | `R/ui.R` | 检查输入、构造 `Phi`、设置 `theta`, `sigma`, `lambda`, `nclust`。 | `RunHarmony.default()` |
-| 外层循环 | `R/utils.R` | 执行每轮 clustering 和 correction。 | `harmonize()` |
+| 外层循环 | `R/utils.R` | 执行每轮聚类和校正。 | `harmonize()` |
 | C++ 对象定义 | `src/harmony.h` | 保存 `Z_orig`, `Z_corr`, `R`, `Y`, `O`, `E` 等核心状态。 | `class harmony` |
-| 初始化与目标函数 | `src/harmony.cpp` | 初始化 centroids、计算 objective。 | `setup()`, `init_cluster_cpp()`, `compute_objective()` |
-| 聚类 | `src/harmony.cpp` | soft k-means + diversity penalty。 | `cluster_cpp()`, `update_R()` |
-| 校正 | `src/harmony.cpp` | mixture-of-experts ridge correction。 | `moe_correct_ridge_cpp()` |
+| 初始化与目标函数 | `src/harmony.cpp` | 初始化中心点、计算目标函数。 | `setup()`, `init_cluster_cpp()`, `compute_objective()` |
+| 聚类 | `src/harmony.cpp` | 软 k-means + 多样性惩罚。 | `cluster_cpp()`, `update_R()` |
+| 校正 | `src/harmony.cpp` | 混合专家岭回归校正。 | `moe_correct_ridge_cpp()` |
 
 ## 7. 最小使用流程
 
@@ -192,43 +192,43 @@ sc.tl.leiden(adata)
 
 | 参数 | 作用 | 实用建议 |
 |---|---|---|
-| `group.by.vars` / `vars_use` | 指定要校正的 covariates。 | 可以传多个变量，例如 `donor` 和 `chemistry`。 |
-| `nclust` | Harmony 内部 mixture experts 数量。 | 默认 `min(round(N / 30), 100)`；太小会接近简单线性回归。 |
-| `theta` | diversity penalty。 | `theta=0` 等于不鼓励 batch mixing；过大可能过度混合。 |
-| `sigma` | soft k-means width。 | 小值更接近 hard clustering；大值让细胞分配更分散。 |
-| `lambda` | ridge penalty。 | 大值更保守，减少 over-correction；小值校正更强。 |
-| `max_iter` | 外层 Harmony 迭代次数。 | 默认通常够用；检查 convergence plot 更稳。 |
+| `group.by.vars` / `vars_use` | 指定要校正的协变量。 | 可以传多个变量，例如 `donor` 和 `chemistry`。 |
+| `nclust` | Harmony 内部混合专家数量。 | 默认 `min(round(N / 30), 100)`；太小会接近简单线性回归。 |
+| `theta` | 多样性惩罚。 | `theta=0` 等于不鼓励批次混合；过大可能过度混合。 |
+| `sigma` | 软 k-means 宽度。 | 小值更接近硬聚类；大值让细胞分配更分散。 |
+| `lambda` | 岭惩罚。 | 大值更保守，减少过度校正；小值校正更强。 |
+| `max_iter` | 外层 Harmony 迭代次数。 | 默认通常够用；检查收敛曲线更稳。 |
 
 ## 9. 结果解释与质控
 
-Harmony 的结果要同时看 batch mixing 和 biological conservation。论文提出 LISI 指标：iLISI 用于衡量局部邻域中 dataset mixing，cLISI 用于衡量 cell type 是否被错误混合 [1]。直观检查时，可以画：
+Harmony 的结果要同时看批次混合和生物学保留。论文提出 LISI 指标：iLISI 用于衡量局部邻域中的数据集混合程度，cLISI 用于衡量细胞类型是否被错误混合 [1]。直观检查时，可以画：
 
-1. UMAP colored by `batch`, `donor`, `platform`。
-2. UMAP colored by known `cell_type` 或 canonical markers。
-3. 每个 cluster 内不同 batch 的比例。
+1. 按 `batch`、`donor`、`platform` 着色的 UMAP。
+2. 按已知 `cell_type` 或经典标志基因着色的 UMAP。
+3. 每个细胞群内不同批次的比例。
 4. Harmony 前后 PCA/UMAP 对比。
-5. known marker expression 是否仍符合生物学预期。
+5. 已知标志基因表达是否仍符合生物学预期。
 
-如果 batch 看起来完全混合但 marker/cell type 也被混掉了，这不是好结果；如果 cell type 很清晰但 batch 仍分层，也说明校正不足或 batch 与 biology confounded。
+如果批次看起来完全混合但标志基因/细胞类型也被混掉了，这不是好结果；如果细胞类型很清晰但批次仍分层，也说明校正不足或批次与生物学差异混杂。
 
 ## 10. 常见问题与风险
 
 <div class="check-grid">
   <article>
-    <strong>把 Harmony 当 corrected expression</strong>
-    <span>Harmony 输出的是 embedding。不要把它当作 gene expression matrix 做 marker gene 或 differential expression。</span>
+    <strong>把 Harmony 当成校正后的表达矩阵</strong>
+    <span>Harmony 输出的是低维表示。不要把它当作基因表达矩阵做标志基因或差异表达。</span>
   </article>
   <article>
     <strong>校正真实生物差异</strong>
-    <span>如果 batch 与 disease group 完全混杂，任何 integration 方法都可能把真实差异当作 batch 去掉。</span>
+    <span>如果批次与疾病分组完全混杂，任何整合方法都可能把真实差异当作批次去掉。</span>
   </article>
   <article>
     <strong>只看 UMAP</strong>
-    <span>UMAP 好看不等于整合正确。需要结合 marker、cluster composition、known biology 和定量指标。</span>
+    <span>UMAP 好看不等于整合正确。需要结合标志基因、细胞群组成、已知生物学和定量指标。</span>
   </article>
   <article>
     <strong>前处理不一致</strong>
-    <span>论文建议拼接数据后统一做 PCA，避免先对各 batch 做 batch-sensitive preprocessing 再整合。</span>
+    <span>论文建议拼接数据后统一做 PCA，避免先对各批次做批次敏感的预处理再整合。</span>
   </article>
 </div>
 
