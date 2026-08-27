@@ -3,7 +3,7 @@ export default {
   title: 'Single Cell Notes',
   description: '单细胞研究工具与分析路径知识库',
   base: process.env.BASE_PATH || '/',
-  cleanUrls: true,
+  cleanUrls: false,
   lastUpdated: true,
   themeConfig: {
     logo: '/brand-mark.svg',
