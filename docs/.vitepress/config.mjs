@@ -207,7 +207,13 @@ export default {
             { text: '中心法则与组学层级', link: '/biology/central-dogma-omics' },
             { text: '测序方法与技术原理', link: '/biology/sequencing-principles' },
             { text: '常见细胞类型', link: '/biology/common-cell-types' },
-            { text: '免疫系统与微环境', link: '/biology/immunology-microenvironment' }
+            { text: '免疫系统与微环境', link: '/biology/immunology-microenvironment' },
+            { text: 'Janeway 免疫学学习图谱', link: '/biology/immunology-roadmap' },
+            { text: '固有免疫', link: '/biology/innate-immunity' },
+            { text: '抗原识别与抗原提呈', link: '/biology/antigen-recognition-presentation' },
+            { text: '淋巴细胞发育与活化', link: '/biology/lymphocyte-development-activation' },
+            { text: '适应性免疫应答', link: '/biology/adaptive-effector-immunity' },
+            { text: '黏膜免疫、疾病与治疗', link: '/biology/mucosal-disease-immunotherapy' }
           ]
         },
         {

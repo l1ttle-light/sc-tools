@@ -1,6 +1,6 @@
 # 生物学知识
 
-这一部分先按“分子信息流 -> 多组学层级 -> 测序技术 -> 免疫系统与微环境”的顺序组织。单细胞分析的难点不只是跑工具，而是把 cluster、marker、pathway、cell state 和疾病机制放回生物学框架里解释。
+这一部分先按“分子信息流 -> 多组学层级 -> 测序技术 -> 细胞类型 -> 免疫学机制 -> 组织微环境”的顺序组织。单细胞分析的难点不只是跑工具，而是把 cluster、marker、pathway、cell state 和疾病机制放回生物学框架里解释。
 
 <div class="path-grid">
   <a href="/biology/central-dogma-omics">
@@ -19,6 +19,30 @@
     <strong>免疫系统与微环境</strong>
     <span>免疫细胞谱系、先天/适应性免疫、肿瘤和组织微环境解释框架。</span>
   </a>
+  <a href="/biology/immunology-roadmap">
+    <strong>Janeway 免疫学学习图谱</strong>
+    <span>把《詹韦免疫生物学》的五大部分重组为适合单细胞研究的免疫学路线。</span>
+  </a>
+  <a href="/biology/innate-immunity">
+    <strong>固有免疫</strong>
+    <span>屏障、补体、模式识别、炎症、干扰素、NK 细胞和固有淋巴样细胞。</span>
+  </a>
+  <a href="/biology/antigen-recognition-presentation">
+    <strong>抗原识别与抗原提呈</strong>
+    <span>BCR、TCR、MHC、抗原加工、交叉提呈和非经典抗原识别。</span>
+  </a>
+  <a href="/biology/lymphocyte-development-activation">
+    <strong>淋巴细胞发育与活化</strong>
+    <span>V(D)J 重排、B/T 细胞选择、TCR/BCR 信号、共刺激和共抑制。</span>
+  </a>
+  <a href="/biology/adaptive-effector-immunity">
+    <strong>适应性免疫应答</strong>
+    <span>T cell priming、CD4/CD8 效应分化、B cell 生发中心、抗体功能和免疫记忆。</span>
+  </a>
+  <a href="/biology/mucosal-disease-immunotherapy">
+    <strong>黏膜免疫、疾病与治疗</strong>
+    <span>黏膜屏障、微生物群、免疫缺陷、过敏、自身免疫、移植、疫苗和肿瘤免疫治疗。</span>
+  </a>
   <a href="/references/">
     <strong>参考资料</strong>
     <span>收集本部分引用的经典论文、高质量综述和官方资源。</span>
@@ -31,6 +55,8 @@
   <span>先问分子层级</span>
   <span>再问测量技术</span>
   <span>接着看细胞类型</span>
+  <span>再看免疫识别</span>
+  <span>理解效应应答</span>
   <span>最后回到组织生态位</span>
 </div>
 

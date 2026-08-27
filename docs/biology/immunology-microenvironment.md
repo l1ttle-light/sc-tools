@@ -56,6 +56,27 @@ Binnewies 等人在 *Nature Medicine* 综述中把肿瘤免疫微环境整理为
   <span>回到功能验证</span>
 </div>
 
+## 深入阅读路线
+
+<div class="path-grid">
+  <a href="/biology/immunology-roadmap">
+    <strong>Janeway 免疫学学习图谱</strong>
+    <span>先建立免疫系统整体地图，再进入固有免疫、抗原识别、淋巴细胞发育和疾病免疫。</span>
+  </a>
+  <a href="/biology/innate-immunity">
+    <strong>固有免疫</strong>
+    <span>理解 PRR、补体、炎症、干扰素、NK 和 ILC，适合解释髓系与组织炎症状态。</span>
+  </a>
+  <a href="/biology/adaptive-effector-immunity">
+    <strong>适应性免疫应答</strong>
+    <span>理解 T/B 细胞如何被启动、分化、产生效应功能和形成记忆。</span>
+  </a>
+  <a href="/biology/mucosal-disease-immunotherapy">
+    <strong>黏膜免疫、疾病与治疗</strong>
+    <span>把免疫耐受、炎症性疾病、疫苗和肿瘤免疫治疗放回真实组织场景。</span>
+  </a>
+</div>
+
 ## 自检问题
 
 1. 先天免疫和适应性免疫的主要差异是什么？
